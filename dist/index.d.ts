@@ -1,4 +1,3 @@
-/// <reference types="node" />
 /**
  * Compute a nilsimsa digest for the provided buffer
  * @param input - The buffer to compute a digest for

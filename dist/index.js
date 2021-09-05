@@ -63,8 +63,7 @@ function tran53(a, b, c, n) {
 function digest(input) {
     const acc = Array(256).fill(0);
     let window = [];
-    for (let offset = 0; offset < input.length; offset++) {
-        const c = input.readUInt8(offset);
+    for (const c of input) {
         if (window.length > 1) {
             acc[tran53(c, window[0], window[1], 0)] += 1;
         }
