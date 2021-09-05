@@ -63,13 +63,11 @@ function tran53(a: number, b: number, c: number, n: number) {
  * @param input - The buffer to compute a digest for
  * @returns Byte digest
  */
-export function digest(input: Buffer): number[] {
+export function digest(input: Uint8Array): number[] {
   const acc: number[] = Array(256).fill(0);
   let window: number[] = [];
 
-  for (let offset = 0; offset < input.length; offset++) {
-    const c = input.readUInt8(offset);
-
+  for (const c of input) {
     if (window.length > 1) {
       acc[tran53(c, window[0], window[1], 0)] += 1;
     }
@@ -119,7 +117,7 @@ export function digest(input: Buffer): number[] {
  * @param input - The buffer to compute a digest for
  * @returns Hexstring digest
  */
-export function hexDigest(input: Buffer): string {
+export function hexDigest(input: Uint8Array): string {
   return toHexString(digest(input));
 }
 

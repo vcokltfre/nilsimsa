@@ -1,13 +1,16 @@
 import { compareDigests, digest, hexDigest, compareHexDigests } from "./";
+import { TextEncoder } from "text-encoding";
+
+const encoder = new TextEncoder();
 
 test("hex digest", () => {
-  expect(hexDigest(Buffer.from("test string"))).toBe(
+  expect(hexDigest(encoder.encode("test string"))).toBe(
     "42c82c184080082040001004000000084e1043b0c0925829003e84c860410010"
   );
 });
 
 test("compare equal", () => {
-  const a = digest(Buffer.from("some string"));
+  const a = digest(encoder.encode("some string"));
   expect(compareDigests(a, a)).toBe(128);
 });
 
@@ -38,19 +41,19 @@ test("compare zero with non-zero (hex)", () => {
 });
 
 test("short 1 (hex)", () => {
-  expect(hexDigest(Buffer.from("a"))).toBe(
+  expect(hexDigest(encoder.encode("a"))).toBe(
     "0000000000000000000000000000000000000000000000000000000000000000"
   );
 });
 
 test("short 2 (hex)", () => {
-  expect(hexDigest(Buffer.from("a"))).toBe(
+  expect(hexDigest(encoder.encode("a"))).toBe(
     "0000000000000000000000000000000000000000000000000000000000000000"
   );
 });
 
 test("short 3 (hex)", () => {
-  expect(hexDigest(Buffer.from("aaa"))).toBe(
+  expect(hexDigest(encoder.encode("aaa"))).toBe(
     "0000000000000000000000000000000040000000000000000000000000000000"
   );
 });
